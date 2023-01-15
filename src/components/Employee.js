@@ -3,9 +3,7 @@ import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 // files
 import { EmployeeContext } from '../context/EmployeeContext';
-
-
-// import EditForm from "./EditForm";
+import EditForm from "./EditForm";
 
 
 const Employee = ({ employee }) => {
