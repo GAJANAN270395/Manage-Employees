@@ -1,9 +1,15 @@
 import React from "react";
 import "./style.css";
-import EmployeeList from "./components/EmployeeList";
+
+// files
+// import EmloyeeList from './components/EmployeeList';
+
 
 export default function App() {
   return (
-     <EmployeeList/>
+    <>
+      {/* <EmloyeeList /> */}
+      hi
+    </>
   );
 }
