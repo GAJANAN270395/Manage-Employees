@@ -12,7 +12,7 @@ const EmployeeList = () => {
         <div className="row">
           <div className="col-sm-6">
             <h2>
-              Manage <b> Employees </b>
+              Manage <b> Employees List</b>
             </h2>
           </div>
           <div className="col-sm-6">
