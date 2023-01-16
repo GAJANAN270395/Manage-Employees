@@ -3,7 +3,7 @@ import "./style.css";
 
 // files
 import EmloyeeList from './components/EmployeeList';
-import EmployeeContext from './context/EmployeeContext';
+import EmployeeContextProvider from './context/EmployeeContext';
 
 
 export default function App() {
@@ -11,7 +11,9 @@ export default function App() {
     <div className='container-xl'>
       <div className='table-responsive'>
         <div className='table-wrapper'>
-          <EmloyeeList />
+          <EmployeeContextProvider>
+              <EmloyeeList />
+          </EmployeeContextProvider>
         </div>
       </div>    
     </div>
@@ -20,12 +22,3 @@ export default function App() {
 
 // https://symphonious-scone-76d32e.netlify.app/#
 
-// <div className="container-xl">
-//       <div className="table-responsive">
-//         <div className="table-wrapper">
-//             <EmployeeContextProvider>
-//               <EmployeeList />
-//             </EmployeeContextProvider>
-//         </div>
-//       </div>
-//     </div>

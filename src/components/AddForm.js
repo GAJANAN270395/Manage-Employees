@@ -6,7 +6,7 @@ import { EmployeeContext } from '../context/EmployeeContext';
 
 
 const AddForm = ()=> {
-  // const { dispatch } = useContext(EmployeeContext);
+  const { dispatch } = useContext(EmployeeContext);
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ const AddForm = ()=> {
   const [phone, setPhone] = useState('');
 
   const handleSubmit = (e)=> {
-    e.prevantDefault();
+    e.preventDefault();
     dispatch({
       type: 'add_employee',
       employee: { name, email, address, phone }

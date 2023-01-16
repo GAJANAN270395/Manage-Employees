@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {Button, Modal, Alert} from 'react-bootstrap'
+import { Button, Modal, Alert } from 'react-bootstrap';
 
 // files
 import AddForm from './AddForm';
@@ -7,29 +7,41 @@ import Employee from './Employee';
 import { EmployeeContext } from '../context/EmployeeContext';
 import Pagination from './Pagination';
 
-
-
-const EmployeeList = ()=> {
-  // const { sortedEmployees } = useContext(EmployeeContext);
+const EmployeeList = () => {
+  const { sortedEmployees } = useContext(EmployeeContext);
 
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage] = useState(5);
 
-  const haldleClose = () => setShow(false);
-  const handleshow = () => setShow(true);
-  const haldleAlert = () => {
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleAlert = () => {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
     }, 2000);
   };
-  
 
-  
+  useEffect(() => {
+    handleClose();
+    return () => {
+      handleAlert();
+    };
+  }, [sortedEmployees]);
 
-  return(
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indesOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = sortedEmployees.slice(
+    indesOfFirstEmployee,
+    indexOfLastEmployee
+  );
+
+  const totalPages = Math.ceil(sortedEmployees.length / employeesPerPage);
+  const totalEmployee = employeesPerPage * totalPages;
+
+  return (
     <>
       <div className="table-title">
         <div className="row">
@@ -39,12 +51,14 @@ const EmployeeList = ()=> {
             </h2>
           </div>
           <div className="col-sm-6">
-              <Button
-                className="btn btn-success text-white"
-              >               
-                <i className="material-icons">&#xE147;</i>{" "}
-                <span>Add New Employee</span>
-              </Button>
+            <Button
+              onClick={handleShow} 
+              className="btn btn-success text-white"
+              data-toggle="modal"
+            >
+              <i className="material-icons">&#xE147;</i>{' '}
+              <span>Add New Employee</span>
+            </Button>
           </div>
         </div>
       </div>
@@ -53,7 +67,7 @@ const EmployeeList = ()=> {
         EmployeList successfully updated! 
       </Alert> */}
 
-      <table className='table table-striped table-hover w-100'>
+      <table className="table table-striped table-hover w-100">
         <thead>
           <tr>
             <th>Name</th>
@@ -64,34 +78,42 @@ const EmployeeList = ()=> {
           </tr>
         </thead>
         <tbody>
-
+          {
+            currentEmployees.map((employee) => (
+              <tr key={employee.id}>
+                <Employee employee={employee} />
+              </tr>
+            ))
+          }
         </tbody>
       </table>
 
-       {/* Pagination */}
-       {/* <Pagination /> */}
+      {/* Pagination */}
+      <Pagination
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        totalEmployee={totalEmployee}
+        currentEmployees={currentEmployees}      
+      />
 
+      {/* Modal */}
+      {/* <Modal show={show} onHide={handleClose}>
+        <Modal.Header className="modal-header" closeButton>
+          <Modal.Title>Add New Employee</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddForm />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal> */}
 
-       {/* Modal */}
-       {/* <Modal>
-         <Modal.Header>
-
-         </Modal.Header>
-
-         <Modal.Body>
-
-         </Modal.Body>
-
-         <Modal.Footer>
-
-         </Modal.Footer>
-       </Modal> */}
-       
-
-        <AddForm />
-     
+      <AddForm />
     </>
-  )
-}
+  );
+};
 
 export default EmployeeList;
