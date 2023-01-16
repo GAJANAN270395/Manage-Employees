@@ -54,7 +54,7 @@ const Employee = ({ employee }) => {
               placement={'top'}
               overlay={
                 <Tooltip id={'tooltip-top'}>
-                  <strong>Delete</strong>>
+                  <strong>Delete</strong>
                 </Tooltip>
               }            
             >

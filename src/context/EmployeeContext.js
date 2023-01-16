@@ -48,7 +48,7 @@ const EmployeeContextProvider = (props)=> {
 
 
   return(
-    <EmployeeContext.Provider>
+    <EmployeeContext.Provider value={{ sortedEmployees, dispatch}}>
       {props.children}
     </EmployeeContext.Provider>
   )
@@ -56,9 +56,3 @@ const EmployeeContextProvider = (props)=> {
 
 export default EmployeeContextProvider;
 
-
-/*
-
-  
-
-*/

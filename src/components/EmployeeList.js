@@ -1,13 +1,33 @@
-import React, {useState} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {Button, Modal, Alert} from 'react-bootstrap'
 
 // files
 import AddForm from './AddForm';
+import Employee from './Employee';
+import { EmployeeContext } from '../context/EmployeeContext';
+import Pagination from './Pagination';
+
+
 
 const EmployeeList = ()=> {
+  // const { sortedEmployees } = useContext(EmployeeContext);
 
+  const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [employeesPerPage] = useState(5);
 
+  const haldleClose = () => setShow(false);
+  const handleshow = () => setShow(true);
+  const haldleAlert = () => {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+  };
+  
+
+  
 
   return(
     <>
